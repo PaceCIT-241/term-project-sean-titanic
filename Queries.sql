@@ -1,7 +1,6 @@
 USE titanic_db;
 
 SELECT * FROM Passenger LIMIT 100;
-SELECT * FROM Ticket LIMIT 100;
 
 SELECT p.Name, s.Survived 
 FROM Passenger p

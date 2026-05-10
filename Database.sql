@@ -1,16 +1,19 @@
 CREATE DATABASE IF NOT EXISTS titanic_db;
 USE titanic_db;
+
 DROP TABLE IF EXISTS Manifest;
 DROP TABLE IF EXISTS Survival_Record;
 DROP TABLE IF EXISTS Passenger;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Port;
 DROP TABLE IF EXISTS Titanic_Staging;
+
 CREATE TABLE Titanic_Staging (
     PassengerId INT, Survived INT, Pclass INT, Name VARCHAR(255), 
     Gender VARCHAR(50), Age FLOAT, SibSp INT, Parch INT, 
     Ticket VARCHAR(100), Fare FLOAT, Cabin VARCHAR(50), Embarked CHAR(1)
 );
+
 CREATE TABLE Port (
     Port_Code CHAR(1) PRIMARY KEY,
     City_Name VARCHAR(50) NOT NULL
@@ -25,22 +28,22 @@ CREATE TABLE Ticket (
 CREATE TABLE Passenger (
     Passenger_ID INT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
-    Age FLOAT NULL, -- Null allowed for missing data [cite: 16]
+    Age FLOAT NULL,
     Gender VARCHAR(10)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Survival_Record (
     Passenger_ID INT PRIMARY KEY,
     Survived BOOLEAN NOT NULL,
-    CONSTRAINT FK_Survival_Passenger FOREIGN KEY (Passenger_ID) REFERENCES Passenger(Passenger_ID)
+    FOREIGN KEY (Passenger_ID) REFERENCES Passenger(Passenger_ID)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Manifest (
     Manifest_ID INT AUTO_INCREMENT PRIMARY KEY,
-    Passenger_ID INT NOT NULL,
-    Ticket_Number VARCHAR(100) NOT NULL,
-    Port_Code CHAR(1) NOT NULL,
-    CONSTRAINT FK_Manifest_Passenger FOREIGN KEY (Passenger_ID) REFERENCES Passenger(Passenger_ID),
-    CONSTRAINT FK_Manifest_Ticket FOREIGN KEY (Ticket_Number) REFERENCES Ticket(Ticket_Number),
-    CONSTRAINT FK_Manifest_Port FOREIGN KEY (Port_Code) REFERENCES Port(Port_Code)
+    Passenger_ID INT,
+    Ticket_Number VARCHAR(100),
+    Port_Code CHAR(1),
+    FOREIGN KEY (Passenger_ID) REFERENCES Passenger(Passenger_ID),
+    FOREIGN KEY (Ticket_Number) REFERENCES Ticket(Ticket_Number),
+    FOREIGN KEY (Port_Code) REFERENCES Port(Port_Code)
 ) ENGINE=InnoDB;
