@@ -1,0 +1,6 @@
+LOAD DATA LOCAL INFILE 'C:/Users/Moist/Downloads/Titanic Dataset.csv' 
+INTO TABLE Passenger 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
