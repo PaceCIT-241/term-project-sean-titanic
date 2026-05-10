@@ -1,23 +1,16 @@
--- CIT 241: Term Project Database Design [cite: 1]
 CREATE DATABASE IF NOT EXISTS titanic_db;
 USE titanic_db;
-
--- Drop tables in reverse order of relationships [cite: 14]
 DROP TABLE IF EXISTS Manifest;
 DROP TABLE IF EXISTS Survival_Record;
 DROP TABLE IF EXISTS Passenger;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Port;
 DROP TABLE IF EXISTS Titanic_Staging;
-
--- Staging Table for CSV import [cite: 19]
 CREATE TABLE Titanic_Staging (
     PassengerId INT, Survived INT, Pclass INT, Name VARCHAR(255), 
     Gender VARCHAR(50), Age FLOAT, SibSp INT, Parch INT, 
     Ticket VARCHAR(100), Fare FLOAT, Cabin VARCHAR(50), Embarked CHAR(1)
 );
-
--- Normalized Entities (3-8 entities required) [cite: 14]
 CREATE TABLE Port (
     Port_Code CHAR(1) PRIMARY KEY,
     City_Name VARCHAR(50) NOT NULL
