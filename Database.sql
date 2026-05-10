@@ -1,3 +1,9 @@
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS titanic_db;
+
+-- Tell MySQL to use this database for the following commands
+USE titanic_db;
+
 -- 1. Create Port Table
 CREATE TABLE Port (
     Port_Code CHAR(1) PRIMARY KEY,
