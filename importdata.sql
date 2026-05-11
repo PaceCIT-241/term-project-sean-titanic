@@ -4,11 +4,9 @@ LOAD DATA LOCAL INFILE 'C:/Users/Moist/Downloads/Titanic Dataset.csv'
 INTO TABLE Titanic_Staging 
 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
 
--- Populate Reference data
 INSERT IGNORE INTO Port (Port_Code, City_Name) VALUES 
 ('C', 'Cherbourg'), ('Q', 'Queenstown'), ('S', 'Southampton');
 
--- Populate Main Tables
 INSERT IGNORE INTO Ticket (Ticket_Number, Fare, Class)
 SELECT DISTINCT Ticket, Fare, Pclass FROM Titanic_Staging;
 
